@@ -41,7 +41,8 @@ sleep(10).then(() => console.log("F"));
 
 console.log("G");
 
-// prediction:
-// actual:
-// why I was wrong (one line per miss):
+// prediction: A D E G C F B
+// actual: A D G C F E B
+// why I was wrong (one line per miss): await이 함수 내에서 기다리는 것으로 work() 함수가 끝나면 바로 처리되는 것으로 생각했으나 
+// 함수를 부른 쪽은 기다리지 않으니 아래의 G를 먼저 출력하고 sleep이 10인 F를 출력한 후 work()함수 내의 sleep이 30인 E가 출력되야 한다.
 //
