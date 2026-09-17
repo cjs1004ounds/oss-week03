@@ -2,12 +2,12 @@
 
 오픈소스SW설계및실습 3주차 대면 실습 (광운대학교, 2026년 2학기)
 
-이 줄을 본인 이름과 학번으로 바꾸고 커밋, push 하는 것까지가 P0입니다.
+# Kang Sunghun, Kwangwoon Univ, 2026
 
 ## 실습 규칙
 
 - AI에게 질문하는 것은 자유입니다. 개념이든 에러 메시지든 문서든 뭐든 물어보세요. 다만 AI가 만들어 준 코드를 붙여 넣지는 마세요. 코드는 한 줄 한 줄 직접 칩니다.
-- 인라인 자동완성은 꺼 두세요. `Ctrl+Shift+P` → *GitHub Copilot: Disable Inline Suggestions*
+- 인라인 자동완성은 꺼 두세요. `Ctrl+Shift+P` → _GitHub Copilot: Disable Inline Suggestions_
 - 문제 하나를 풀 때마다 커밋 하나. 커밋 메시지는 각 문제에 적힌 것을 그대로 씁니다.
 - 막히면 우선 맨 아래 **흔한 오류**를 보고, 그래도 안 풀리면 손을 들어 주세요.
 - 강의실 인터넷이 안 되는 경우를 대비해 `cache/` 폴더에 API 응답을 저장해 두었습니다. 이걸 쓰는 방법은 P6에 있고, 필요하면 P6을 P4보다 먼저 해도 됩니다.
@@ -133,7 +133,7 @@ Error: KAKAO_REST_KEY is not set. Copy .env.example to .env and run with --env-f
 
 ## P7. npm 패키지로 색 입히기 — `p7: chalk colors`
 
-`npm install chalk`로 설치하고, 사용법은 <https://www.npmjs.com/package/chalk> 페이지의 *Usage* 부분을 직접 읽고 알아내세요. `main.js`와 `p4_compare.js`의 출력에서 최고기온이 30도 이상이면 빨간색, 10도 미만이면 파란색으로, 지명은 굵게 표시합니다.
+`npm install chalk`로 설치하고, 사용법은 <https://www.npmjs.com/package/chalk> 페이지의 _Usage_ 부분을 직접 읽고 알아내세요. `main.js`와 `p4_compare.js`의 출력에서 최고기온이 30도 이상이면 빨간색, 10도 미만이면 파란색으로, 지명은 굵게 표시합니다.
 
 끝나면 `package.json`의 `dependencies`에 `chalk`가 들어갔는지, `node_modules/chalk`가 생겼는지, 그리고 `git status`에 `node_modules`가 안 보이는지 확인하세요.
 
@@ -146,19 +146,19 @@ Error: KAKAO_REST_KEY is not set. Copy .env.example to .env and run with --env-f
 
 ## 흔한 오류
 
-| 증상 | 원인 | 해결 |
-|---|---|---|
-| 값이 있어야 할 자리에 `Promise { <pending> }`이나 `undefined`가 나옴 | `await`를 빠뜨림 | 그 호출 앞에 `await`를 붙이세요. 함수 안이라면 그 함수에 `async`도 필요합니다. |
-| `SyntaxError: await is only valid in async functions and the top level bodies of modules` | `async`가 없는 일반 함수 안에서 `await`를 씀, 또는 `package.json`에 `"type": "module"`이 없음 | 함수에 `async`를 붙이세요. `"type": "module"`은 템플릿에 이미 들어 있습니다. |
-| `TypeError: Cannot read properties of undefined (reading 'temperature_2m')` | 응답 객체의 경로가 틀림, 또는 `res.json()`을 `await`하지 않음 | `console.log(JSON.stringify(raw, null, 2))`로 실제 구조를 보고 키를 따라가세요. 없을 수도 있는 키는 `?.`로 접근합니다. |
-| `TypeError: fetch failed` 아래에 `ENOTFOUND` | 호스트 이름 오타, 또는 네트워크 없음 | URL을 브라우저에 붙여 넣어 열리는지 보세요. 네트워크가 없으면 P6의 `--offline`으로 진행합니다. |
-| `Error: HTTP 400: {"error":true,"reason":"..."}` | 파라미터 이름이나 값이 틀림 | `reason`에 무엇이 틀렸는지 적혀 있습니다. 문서 페이지의 철자와 비교하세요. |
-| `Error: HTTP 429` | 짧은 시간에 너무 많이 호출함 | 몇 초 기다리세요. 반복문 안에서 API를 호출하지 않도록 코드를 확인합니다. |
-| `p4_compare.js`에서 도시 하나가 틀리면 나머지 도시도 안 나옴 | `Promise.allSettled` 대신 `Promise.all`을 씀 | `allSettled`는 하나가 실패해도 전체가 실패하지 않습니다. 결과마다 `r.status`를 확인하세요. |
-| `node.exe: .env: not found` (Windows) 또는 `node: .env: not found` | `--env-file=.env`를 붙였는데 `.env` 파일이 없음. Node가 파일을 못 찾아 프로그램이 시작도 안 됨 | `.env.example`을 `.env`로 복사했는지 확인하세요. `ls -a`에 `.env`가 보여야 합니다. |
-| `Error: KAKAO_REST_KEY is not set` | `--env-file=.env` 없이 실행함, 또는 `.env`의 변수 이름 오타 | `node --env-file=.env p5_kakao.js …`로 실행하세요. `.env` 내용은 정확히 `KAKAO_REST_KEY=키` 한 줄, 따옴표 없이 씁니다. |
-| `Error: HTTP 401: {"errorType":"AccessDeniedError",…}` | 키가 틀렸거나 잘렸음, 또는 헤더를 안 넣음 | `message`를 읽으면 원인이 갈립니다. `cannot find Authorization : KakaoAK header`면 헤더가 없거나 형식이 틀린 것이고, `wrong appKey(...) format`이면 키 값이 틀린 것입니다. REST API 키를 다시 복사하세요 (어드민 키가 아닙니다). 헤더는 `Authorization: KakaoAK <키>`이고 `KakaoAK` 뒤에 공백이 하나 있습니다. |
-| `HTTP 403`, 또는 앱이나 사용량을 언급하는 에러 | 이 앱에 카카오맵 사용 설정이 꺼져 있음 | Kakao Developers → 내 앱 → **[카카오맵] → [사용 설정] → [상태] ON**. 무료 사용량은 처음 켠 앱에만 주어집니다. |
-| `Cannot find package 'chalk'` | `npm install chalk`를 안 했거나 다른 폴더에서 함 | 저장소 루트로 이동해서 `npm install chalk`를 하고 `ls node_modules/chalk`로 확인하세요. |
+| 증상                                                                                      | 원인                                                                                           | 해결                                                                                                                                                                                                                                                                                                           |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 값이 있어야 할 자리에 `Promise { <pending> }`이나 `undefined`가 나옴                      | `await`를 빠뜨림                                                                               | 그 호출 앞에 `await`를 붙이세요. 함수 안이라면 그 함수에 `async`도 필요합니다.                                                                                                                                                                                                                                 |
+| `SyntaxError: await is only valid in async functions and the top level bodies of modules` | `async`가 없는 일반 함수 안에서 `await`를 씀, 또는 `package.json`에 `"type": "module"`이 없음  | 함수에 `async`를 붙이세요. `"type": "module"`은 템플릿에 이미 들어 있습니다.                                                                                                                                                                                                                                   |
+| `TypeError: Cannot read properties of undefined (reading 'temperature_2m')`               | 응답 객체의 경로가 틀림, 또는 `res.json()`을 `await`하지 않음                                  | `console.log(JSON.stringify(raw, null, 2))`로 실제 구조를 보고 키를 따라가세요. 없을 수도 있는 키는 `?.`로 접근합니다.                                                                                                                                                                                         |
+| `TypeError: fetch failed` 아래에 `ENOTFOUND`                                              | 호스트 이름 오타, 또는 네트워크 없음                                                           | URL을 브라우저에 붙여 넣어 열리는지 보세요. 네트워크가 없으면 P6의 `--offline`으로 진행합니다.                                                                                                                                                                                                                 |
+| `Error: HTTP 400: {"error":true,"reason":"..."}`                                          | 파라미터 이름이나 값이 틀림                                                                    | `reason`에 무엇이 틀렸는지 적혀 있습니다. 문서 페이지의 철자와 비교하세요.                                                                                                                                                                                                                                     |
+| `Error: HTTP 429`                                                                         | 짧은 시간에 너무 많이 호출함                                                                   | 몇 초 기다리세요. 반복문 안에서 API를 호출하지 않도록 코드를 확인합니다.                                                                                                                                                                                                                                       |
+| `p4_compare.js`에서 도시 하나가 틀리면 나머지 도시도 안 나옴                              | `Promise.allSettled` 대신 `Promise.all`을 씀                                                   | `allSettled`는 하나가 실패해도 전체가 실패하지 않습니다. 결과마다 `r.status`를 확인하세요.                                                                                                                                                                                                                     |
+| `node.exe: .env: not found` (Windows) 또는 `node: .env: not found`                        | `--env-file=.env`를 붙였는데 `.env` 파일이 없음. Node가 파일을 못 찾아 프로그램이 시작도 안 됨 | `.env.example`을 `.env`로 복사했는지 확인하세요. `ls -a`에 `.env`가 보여야 합니다.                                                                                                                                                                                                                             |
+| `Error: KAKAO_REST_KEY is not set`                                                        | `--env-file=.env` 없이 실행함, 또는 `.env`의 변수 이름 오타                                    | `node --env-file=.env p5_kakao.js …`로 실행하세요. `.env` 내용은 정확히 `KAKAO_REST_KEY=키` 한 줄, 따옴표 없이 씁니다.                                                                                                                                                                                         |
+| `Error: HTTP 401: {"errorType":"AccessDeniedError",…}`                                    | 키가 틀렸거나 잘렸음, 또는 헤더를 안 넣음                                                      | `message`를 읽으면 원인이 갈립니다. `cannot find Authorization : KakaoAK header`면 헤더가 없거나 형식이 틀린 것이고, `wrong appKey(...) format`이면 키 값이 틀린 것입니다. REST API 키를 다시 복사하세요 (어드민 키가 아닙니다). 헤더는 `Authorization: KakaoAK <키>`이고 `KakaoAK` 뒤에 공백이 하나 있습니다. |
+| `HTTP 403`, 또는 앱이나 사용량을 언급하는 에러                                            | 이 앱에 카카오맵 사용 설정이 꺼져 있음                                                         | Kakao Developers → 내 앱 → **[카카오맵] → [사용 설정] → [상태] ON**. 무료 사용량은 처음 켠 앱에만 주어집니다.                                                                                                                                                                                                  |
+| `Cannot find package 'chalk'`                                                             | `npm install chalk`를 안 했거나 다른 폴더에서 함                                               | 저장소 루트로 이동해서 `npm install chalk`를 하고 `ls node_modules/chalk`로 확인하세요.                                                                                                                                                                                                                        |
 
 에러 메시지는 위에서 아래로 읽으세요. 파일 이름과 줄 번호가 그 안에 있습니다. AI에게는 메시지가 무슨 뜻인지 설명해 달라고 하되, 고쳐 달라고는 하지 마세요.
