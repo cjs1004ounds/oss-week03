@@ -25,6 +25,7 @@
 import { geocode, forecast, parseForecast, fetchForecastRaw } from "./p3_weather.js";
 import { describe } from "./wmo.js";
 import fs from "node:fs/promises";
+import chalk from "chalk";
 
 const args = process.argv.slice(2);
 const flags = args.filter((a) => a.startsWith("--"));          // ["--save"] 같은 것
@@ -57,12 +58,19 @@ try {
 
   // TODO (P3): 세 부분 출력
   //   1. `${place.name}, ${place.country} (${lat}, ${lon})`    lat/lon 은 toFixed(2)
-  console.log(`${place.name}, ${place.country} (${place.latitude.toFixed(2)}, ${place.longitude.toFixed(2)})`);
+  console.log(`${chalk.bold(place.name)}, ${chalk.bold(place.country)} (${place.latitude.toFixed(2)}, ${place.longitude.toFixed(2)})`);
   //   2. `Now: ${temp.toFixed(1)}${unit}, ${describe(code)}`
   console.log(`Now: ${fc.now.temp.toFixed(1)}${fc.now.unit}, ${describe(fc.now.code)}`);
   //   3. 날마다: `${label(date)}  min ${min}  max ${max}  ${describe(code)}`    min/max 는 toFixed(1)
   for (const day of fc.days) {
-    console.log(`${label(day.date)} min ${day.min.toFixed(1)} max ${day.max.toFixed(1)}  ${describe(day.code)}`);
+    let maxTex = day.max.toFixed(1);
+    if(day.max >= 30){
+      maxTex = chalk.red(maxTex);
+    }
+    else if (day.max < 10){
+      maxTex = chalk.blue(maxTex);
+    }
+    console.log(`${label(day.date)} min ${day.min.toFixed(1)} max ${maxTex}  ${describe(day.code)}`);
   }
   
   if (flags.includes("--save")){
