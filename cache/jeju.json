@@ -1,0 +1,57 @@
+{
+  "place": {
+    "name": "Jeju",
+    "country": "Ethiopia",
+    "latitude": 8.41667,
+    "longitude": 39.63333
+  },
+  "raw": {
+    "latitude": 8.400703,
+    "longitude": 39.6309,
+    "generationtime_ms": 37.79268264770508,
+    "utc_offset_seconds": 10800,
+    "timezone": "Africa/Addis_Ababa",
+    "timezone_abbreviation": "GMT+3",
+    "elevation": 1824,
+    "current_units": {
+      "time": "iso8601",
+      "interval": "seconds",
+      "temperature_2m": "°C",
+      "weather_code": "wmo code"
+    },
+    "current": {
+      "time": "2026-09-18T10:45",
+      "interval": 900,
+      "temperature_2m": 21.2,
+      "weather_code": 51
+    },
+    "daily_units": {
+      "time": "iso8601",
+      "temperature_2m_max": "°C",
+      "temperature_2m_min": "°C",
+      "weather_code": "wmo code"
+    },
+    "daily": {
+      "time": [
+        "2026-09-18",
+        "2026-09-19",
+        "2026-09-20"
+      ],
+      "temperature_2m_max": [
+        22.8,
+        24,
+        23.9
+      ],
+      "temperature_2m_min": [
+        14.8,
+        14.7,
+        15.4
+      ],
+      "weather_code": [
+        81,
+        53,
+        51
+      ]
+    }
+  }
+}
